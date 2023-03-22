@@ -28,6 +28,15 @@ Create a function that takes in a string, creates a new list item with that stri
 Call this function within your getQuote function so that the quotes get stored in the "quote-history" list.
 */
 
+/* Bonus Tasks 
+What would happen if the API repeated a quote? Let's ensure that that doesn't affect our list of quotes.
+
+Change your code so that if a repeat quote is generated, it will not be added again to the list of previous quotes. This means that your list should not contain any duplicates.
+*/
+
+// array to store list of quotes (not shown in browser)
+const list = [];
+
 function addQuote(string) {
 	const quotes = document.querySelector('#quote-history');
 	quotes.insertAdjacentHTML('beforeend', `<li>${string}</li>`);
@@ -36,10 +45,15 @@ function addQuote(string) {
 async function getQuote() {
 	const response = await fetch('https://meowfacts.herokuapp.com/');
 	const data = await response.json();
-	console.log(data);
+	// console.log(data);
 	const h1 = document.querySelector('#quote');
 	h1.textContent = data.data[0];
-	addQuote(h1.textContent);
+	// if list doesn't already include quote, call addQuote and push to list
+	if (!list.includes(h1.textContent)) {
+		addQuote(h1.textContent);
+		list.push(h1.textContent);
+	}
+	console.log(list);
 }
 
 const newQuote = document.querySelector('#new-quote-button');
