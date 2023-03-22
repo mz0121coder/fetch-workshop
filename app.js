@@ -21,3 +21,14 @@ async function getQuote() {
 }
 
 getQuote();
+
+/* Task 2 - on click 
+Sweet - we're getting a new inspirational quote every time the page is refreshed! Let's make the page more interactive.
+
+Attach an event listener to the button already on the page with id "new-quote-button" to call getQuote when the user clicks.
+
+Note: As it's a free API, requests are limited to five per 30 second period; if you exceed this, until that timer resets, you'll receive: "Too many requests. Obtain an auth key for unlimited access."
+*/
+
+const newQuote = document.querySelector('#new-quote-button');
+newQuote.addEventListener('click', getQuote);
